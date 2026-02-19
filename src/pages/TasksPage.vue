@@ -11,12 +11,13 @@
               placeholder="+ Add new task. Press enter to save."
             />
           </div>
-          <!-- List of tasks -->
-          <div class="card mt-2">
-            <ul class="list-group list-group-flush">
-              <Task v-for="task in tasks" :key="task.id" :task="task" />
-            </ul>
-          </div>
+          <!-- List of uncompleted tasks -->
+          <Tasks :tasks="uncompletedTasks" />
+
+          <!-- Show toogle button -->
+
+          <!-- List of completed tasks -->
+          <Tasks :tasks="completedTasks" />
         </div>
       </div>
     </div>
@@ -24,14 +25,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { allTasks } from '../http/task-api'
-import Task from '../components/tasks/Task.vue'
+import { ref, onMounted, computed } from 'vue';
+import { allTasks } from '../http/task-api';
+import Tasks from '../components/tasks/Tasks.vue';
 
-const tasks = ref([])
+const tasks = ref([]);
 
 onMounted(async () => {
-  const { data } = await allTasks()
-  tasks.value = data.data
-})
+  const { data } = await allTasks();
+  tasks.value = data.data;
+});
+
+const uncompletedTasks = computed(() => {
+  return tasks.value.filter((task) => !task.is_completed);
+});
+
+const completedTasks = computed(() => {
+  return tasks.value.filter((task) => task.is_completed);
+});
 </script>
