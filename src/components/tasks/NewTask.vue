@@ -19,11 +19,16 @@ const newTask = reactive({
 
 const emit = defineEmits(['added']);
 
-function addNewTask() {
-  if (event.target.value.trim()) {
-    newTask.name = event.target.value;
+function addNewTask(event) {
+  const val = event.target.value.trim();
+
+  if (val) {
+    emit('added', {
+      name: val,
+      is_completed: false,
+    });
+
     event.target.value = '';
-    emit('added', newTask);
   }
 }
 </script>
