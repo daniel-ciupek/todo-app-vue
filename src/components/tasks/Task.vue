@@ -19,11 +19,11 @@
             type="text"
             @keyup.esc="($event) => (isEdit = false)"
             v-focus
+            @keyup.enter="handleUpdate"
           />
         </div>
         <span v-else>{{ task.name }}</span>
       </div>
-      <!--  <div class="task-date">24 Feb 12:00</div> -->
     </div>
     <TaskActions @edit="($event) => (isEdit = true)" v-show="!isEdit" />
   </li>
@@ -32,6 +32,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import TaskActions from './TaskActions.vue';
+import { updateTask } from '@/http/task-api';
 
 const props = defineProps({
   task: {
@@ -40,7 +41,10 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['updated']);
+
 const isEdit = ref(false);
+
 const completedClass = computed(() => {
   return props.task.is_completed ? 'completed' : '';
 });
@@ -49,5 +53,15 @@ const vFocus = {
   mounted(el) {
     el.focus();
   },
+};
+
+const handleUpdate = (event) => {
+  const updatedTask = {
+    ...props.task,
+    name: event.target.value,
+  };
+
+  isEdit.value = false;
+  emit('updated', updatedTask);
 };
 </script>
