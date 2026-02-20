@@ -10,6 +10,7 @@
             :tasks="uncompletedTasks"
             @updated="handleUpdatedTask"
             @completed="handleCompletedTask"
+            @removed="handleRemovedTask"
           />
 
           <!-- Show toogle button -->
@@ -29,6 +30,7 @@
             :show="completedTasksIsVisible && showCompletedTasks"
             @updated="handleUpdatedTask"
             @completed="handleCompletedTask"
+            @removed="handleRemovedTask"
           />
         </div>
       </div>
@@ -43,6 +45,7 @@ import {
   createTask,
   updateTask,
   completeTask,
+  removeTask,
 } from '../http/task-api';
 import Tasks from '../components/tasks/Tasks.vue';
 import NewTask from '../components/tasks/NewTask.vue';
@@ -107,6 +110,16 @@ const handleCompletedTask = async (task) => {
   const currentTask = tasks.value.find((item) => item.id === task.id);
   if (currentTask) {
     currentTask.is_completed = updatedTask.data.is_completed;
+  }
+};
+
+const handleRemovedTask = async (task) => {
+  try {
+    await removeTask(task.id);
+
+    tasks.value = tasks.value.filter((item) => item.id !== task.id);
+  } catch (error) {
+    console.error('Błąd podczas usuwania:', error);
   }
 };
 </script>
