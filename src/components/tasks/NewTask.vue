@@ -11,24 +11,21 @@
 
 <script setup>
 import { reactive } from 'vue';
+import { useTaskStore } from '../../stores/Task.js';
+
+const taskStore = useTaskStore();
+const { handleAddedTask } = taskStore;
 
 const newTask = reactive({
   name: '',
   is_completed: false,
 });
 
-const emit = defineEmits(['added']);
-
-function addNewTask(event) {
-  const val = event.target.value.trim();
-
-  if (val) {
-    emit('added', {
-      name: val,
-      is_completed: false,
-    });
-
+const addNewTask = async (event) => {
+  if (event.target.value.trim()) {
+    newTask.name = event.target.value;
     event.target.value = '';
+    await handleAddedTask(newTask);
   }
-}
+};
 </script>
