@@ -53,7 +53,7 @@ import Tasks from '../components/tasks/Tasks.vue';
 import NewTask from '../components/tasks/NewTask.vue';
 
 const store = useTaskStore();
-const { task } = storeToRefs(store);
+const { completedTasks, uncompletedTasks } = storeToRefs(store);
 /* store.$patch({
   task: {
     name: 'First task updates using patch',
@@ -66,21 +66,6 @@ const tasks = ref([]);
 onMounted(async () => {
   const { data } = await allTasks();
   tasks.value = data.data;
-  console.log(task.value);
-});
-
-const uncompletedTasks = computed(() => {
-  return tasks.value
-    .filter((task) => !task.is_completed)
-
-    .sort((a, b) => b.id - a.id);
-});
-
-const completedTasks = computed(() => {
-  return tasks.value
-    .filter((task) => task.is_completed)
-
-    .sort((a, b) => b.id - a.id);
 });
 
 const showToggleCompletedBtn = computed(() => {
