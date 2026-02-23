@@ -9,7 +9,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
-  console.log(to, from);
   if (to.meta.auth) {
     return {
       name: 'login',
