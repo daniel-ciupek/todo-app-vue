@@ -1,11 +1,17 @@
-import api from './api';
+import axios from 'axios';
 
-export const csrfCookie = () => api.get('/sanctum/csrf-cookie');
+const sanctum = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  withCredentials: true,
+  withXSRFToken: true,
+});
 
-export const login = (credentials) => api.post('auth/login', credentials);
+export const csrfCookie = () => sanctum.get('/sanctum/csrf-cookie');
 
-export const register = (user) => api.post('auth/register', user);
+export const login = (credentials) => sanctum.post('/auth/login', credentials);
 
-export const logout = () => api.post('auth/logout');
+export const register = (user) => sanctum.post('/auth/register', user);
 
-export const getUser = () => api.get('api/user');
+export const logout = () => sanctum.post('/auth/logout');
+
+export const getUser = () => sanctum.get('/auth/me');
