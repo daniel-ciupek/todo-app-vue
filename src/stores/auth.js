@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const fetchUser = async () => {
     try {
       const { data } = await getUser();
-      user.value = data;
+      user.value = data.user;
     } catch (error) {
       user.value = null;
     }
