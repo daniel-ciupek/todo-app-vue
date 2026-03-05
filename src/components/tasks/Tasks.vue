@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { useTaskStore } from '../../stores/Task';
+import { useTaskStore } from '../../stores/task';
 import Task from './Task.vue';
 
 const store = useTaskStore();

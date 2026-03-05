@@ -19,9 +19,9 @@ export const useTaskStore = defineStore('taskStore', () => {
     tasks.value.filter((task) => task.is_completed),
   );
 
-  const fetchAllTasks = async () => {
-    const { data } = await allTasks();
-    tasks.value = data.data.sort((a, b) => b.id - a.id);
+  const fetchAllTasks = async (params = {}) => {
+    const { data } = await allTasks(params);
+    tasks.value = data.data;
   };
 
   const handleAddedTask = async (newTask) => {

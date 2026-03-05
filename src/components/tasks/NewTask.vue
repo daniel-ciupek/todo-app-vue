@@ -15,7 +15,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
-import { useTaskStore } from '../../stores/Task.js';
+import { useTaskStore } from '../../stores/task.js';
 import SelectPriority from './SelectPriority.vue';
 
 const taskStore = useTaskStore();
