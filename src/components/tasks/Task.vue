@@ -28,7 +28,7 @@
                   type="text"
                   v-focus
                   @keyup.esc="undo"
-                  @keyup.enter="updateTask"
+                  @keyup.enter="handleUpdate"
                   v-model="editingTask"
                   ref="inputRef"
                 />
@@ -111,7 +111,7 @@ const vFocus = {
 const handleUpdate = (event) => {
   const updatedTask = {
     ...props.task,
-    name: event.target.value,
+    name: editingTask.value,
     priority_id: selectedPriority.value,
     due_date: selectedDate.value ? formatDateLocal(selectedDate.value) : null,
   };
