@@ -3,6 +3,7 @@ import './assets/main.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createPinia } from 'pinia';
+import { setupCalendar } from 'v-calendar';
 import route from './router';
 import { useAuthStore } from './stores/auth';
 
@@ -12,5 +13,5 @@ app.use(route);
 
 const store = useAuthStore();
 await store.fetchUser();
-
+app.use(setupCalendar, {});
 app.mount('#app');
