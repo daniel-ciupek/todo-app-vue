@@ -13,5 +13,6 @@ app.use(route);
 
 const store = useAuthStore();
 await store.fetchUser();
+store.initialized = true;
 app.use(setupCalendar, {});
 app.mount('#app');

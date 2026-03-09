@@ -48,7 +48,10 @@ const filterTasks = (key) => {
   selectedValue.value = menuItems[key] ?? 'Inbox';
   router.push({
     name: 'tasks',
-    query: { ...router.currentRoute.value.query, due_date: key },
+    query: {
+      ...router.currentRoute.value.query,
+      due_date: key === 'inbox' ? undefined : key,
+    },
   });
 };
 </script>

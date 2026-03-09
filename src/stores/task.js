@@ -1,4 +1,4 @@
-import { ref, reactive, computed } from 'vue';
+import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import {
   allTasks,
@@ -45,6 +45,8 @@ export const useTaskStore = defineStore('taskStore', () => {
     const currentTask = tasks.value.find((item) => item.id === task.id);
     if (currentTask) {
       currentTask.name = updatedTask.data.name;
+      currentTask.priority = updatedTask.data.priority;
+      currentTask.due_date = updatedTask.data.due_date;
     }
   };
   const handleCompletedTask = async (task) => {

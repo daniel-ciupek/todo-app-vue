@@ -20,10 +20,10 @@ export const usePriorityStore = defineStore('priorityStore', () => {
     };
 
     return priorities.value
-      .map((priority) => {
-        priority['color'] = flagMaps[priority.name];
-        return priority;
-      })
+      .map((priority) => ({
+        ...priority,
+        color: flagMaps[priority.name],
+      }))
       .concat(noPriority);
   });
 

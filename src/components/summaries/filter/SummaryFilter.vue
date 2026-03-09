@@ -29,6 +29,12 @@ const emit = defineEmits({
 
 const router = useRouter();
 
+const activeFilterKey = ref('lastweek');
+
+const activeFilter = computed(
+  () => filterItems.value[activeFilterKey.value] || filterItems.value.thisweek,
+);
+
 const filter = (period) => {
   activeFilterKey.value = period;
   router.push({ name: 'summary', query: { period } });
@@ -40,12 +46,6 @@ const filter = (period) => {
 
 onMounted(() =>
   emit('update', { text: activeFilter.value, period: activeFilterKey.value }),
-);
-
-const activeFilterKey = ref('lastweek');
-
-const activeFilter = computed(
-  () => filterItems.value[activeFilterKey.value] || filterItems.value.thisweek,
 );
 </script>
 

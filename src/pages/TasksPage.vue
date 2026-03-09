@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useTaskStore } from '../stores/task.js';
@@ -49,10 +49,6 @@ import FilterTasks from '../components/tasks/FilterTasks.vue';
 const store = useTaskStore();
 const { completedTasks, uncompletedTasks } = storeToRefs(store);
 const { fetchAllTasks } = store;
-
-// onMounted(async () => {
-//     await fetchAllTasks();
-// });
 
 const route = useRoute();
 

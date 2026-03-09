@@ -108,7 +108,7 @@ const vFocus = {
   },
 };
 
-const handleUpdate = (event) => {
+const handleUpdate = () => {
   const updatedTask = {
     ...props.task,
     name: editingTask.value,

@@ -110,6 +110,8 @@ const addNewTask = async (event) => {
     newTask.due_date = formatDateLocal(newTask.due_date);
     taskInput.value = '';
     await handleAddedTask(newTask);
+    newTask.priority_id = null;
+    newTask.due_date = null;
   }
 };
 </script>

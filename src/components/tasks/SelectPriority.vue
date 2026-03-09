@@ -55,7 +55,9 @@ const setPriority = (id) => {
 };
 
 onMounted(async () => {
-  await fetchAllPriorities();
+  if (listPriorities.value.length <= 1) {
+    await fetchAllPriorities();
+  }
 });
 </script>
 
